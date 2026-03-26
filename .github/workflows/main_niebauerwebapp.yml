@@ -48,18 +48,12 @@ jobs:
         with:
           name: .net-app
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8EB214439B3F4EA0972BAE7203524D4F }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9C68ABFC5F5B4992B040D6DDE47ED07C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_18F24166D2A94426A5E5E75EE799BD49 }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'NiebauerWebApp'
           slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
           

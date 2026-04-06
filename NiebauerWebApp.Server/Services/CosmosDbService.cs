@@ -1,6 +1,5 @@
 using System;
 using Microsoft.Azure.Cosmos;
-using NiebauerWebApp.Server.Models;
 
 namespace NiebauerWebApp.Server.Services;
 

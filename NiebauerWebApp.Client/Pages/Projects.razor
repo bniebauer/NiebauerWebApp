@@ -1,0 +1,36 @@
+﻿@page "/projects"
+@using NiebauerWebApp.Client.Services
+@using NiebauerWebApp.Shared.Models
+@inject PortfolioService PortfolioService
+
+<h1>Projects</h1>
+
+@if (projects == null)
+{
+    <p>Loading...</p>
+}
+else if (!projects.Any())
+{
+    <p>No projects found.</p>
+}
+else
+{
+    @foreach (var project in projects)
+    {
+        <div>
+            <h3>@project.Name</h3>
+            <p>@project.Description</p>
+        </div>
+    }
+}
+
+@code {
+    private List<Project>? projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("Fetching projects...");
+        projects = await PortfolioService.GetProjectsAsync();
+        Console.WriteLine($"Fetched {projects.Count} projects.");
+    }
+}

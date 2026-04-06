@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
+using NiebauerWebApp.Shared.Models;
 using NiebauerWebApp.Server.Services;
 
 namespace NiebauerWebApp.Server.Controllers;
@@ -18,8 +19,8 @@ public class SkillsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var skills = await _cosmosDbService.GetAllAsync<Models.Project>("Skills");
-        if (skills == null || !skills.Any())
+        var skills = await _cosmosDbService.GetAllAsync<Skill>("Skills");
+        if (skills == null)
         {
             return NotFound();
         }
@@ -28,7 +29,7 @@ public class SkillsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(Models.Skill skill)
+    public async Task<IActionResult> Post(Skill skill)
     {
         if (skill == null)
         {

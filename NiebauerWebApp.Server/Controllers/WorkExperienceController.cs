@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
+using NiebauerWebApp.Shared.Models;
 using NiebauerWebApp.Server.Services;
 
 namespace NiebauerWebApp.Server.Controllers;
@@ -18,8 +19,8 @@ public class WorkExperienceController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var workExperiences = await _cosmosDbService.GetAllAsync<Models.WorkExperience>("WorkExperience");
-        if (workExperiences == null || !workExperiences.Any())
+        var workExperiences = await _cosmosDbService.GetAllAsync<WorkExperience>("WorkExperience");
+        if (workExperiences == null)
         {
             return NotFound();
         }
@@ -28,7 +29,7 @@ public class WorkExperienceController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(Models.WorkExperience workExperience)
+    public async Task<IActionResult> Post(WorkExperience workExperience)
     {
         if (workExperience == null)
         {

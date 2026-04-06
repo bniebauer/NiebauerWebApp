@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace NiebauerWebApp.Server.Models;
+namespace NiebauerWebApp.Shared.Models;
 
 public class WorkExperience
 {
@@ -13,3 +13,4 @@ public class WorkExperience
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
 }
+

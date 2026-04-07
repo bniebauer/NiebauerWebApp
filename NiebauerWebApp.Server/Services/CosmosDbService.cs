@@ -5,7 +5,6 @@ namespace NiebauerWebApp.Server.Services;
 
 public class CosmosDbService
 {
-
     private readonly CosmosClient _client;
     private readonly Database database;
 
@@ -19,7 +18,7 @@ public class CosmosDbService
                 PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
             }
         };
-        
+
         _client = new CosmosClient(config["CosmosDb:ConnectionString"], options);
         database = _client.GetDatabase(config["CosmosDb:DatabaseName"]);
     }

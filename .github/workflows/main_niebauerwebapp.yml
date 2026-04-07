@@ -29,6 +29,11 @@ jobs:
       - name: dotnet publish
         run: dotnet publish ./NiebauerWebApp.Server/NiebauerWebApp.Server.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
+      - name: Remove debug artifacts
+        run: |
+          Remove-Item "${{env.DOTNET_ROOT}}/myapp/BlazorDebugProxy" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "${{env.DOTNET_ROOT}}/myapp/Microsoft.Azure.Cosmos.ServiceInterop.dll" -Force -ErrorAction SilentlyContinue
+
       - name: Zip artifact for deployment
         run: Compress-Archive -Path "${{env.DOTNET_ROOT}}/myapp/*" -DestinationPath release.zip
 

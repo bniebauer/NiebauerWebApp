@@ -52,6 +52,9 @@ jobs:
           name: .net-app
           path: .
       
+      - name: List files
+        run: Get-ChildItem -Recurse
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3

@@ -50,7 +50,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-          path: .
+          path: ./published
       
       - name: List files
         run: Get-ChildItem -Recurse
@@ -62,5 +62,5 @@ jobs:
           app-name: 'NiebauerWebApp'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: release.zip
+          package: ./published
           

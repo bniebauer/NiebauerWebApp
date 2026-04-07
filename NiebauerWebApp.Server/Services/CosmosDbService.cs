@@ -11,7 +11,16 @@ public class CosmosDbService
 
     public CosmosDbService(IConfiguration config)
     {
-        _client = new CosmosClient(config["CosmosDb:ConnectionString"]);
+        var options = new CosmosClientOptions
+        {
+            ConnectionMode = ConnectionMode.Gateway,
+            SerializerOptions = new CosmosSerializationOptions
+            {
+                PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
+            }
+        };
+        
+        _client = new CosmosClient(config["CosmosDb:ConnectionString"], options);
         database = _client.GetDatabase(config["CosmosDb:DatabaseName"]);
     }
 
